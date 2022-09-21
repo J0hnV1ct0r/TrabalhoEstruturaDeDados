@@ -21,21 +21,26 @@ class Lista{
  }
 }
 
+
 void main() {
   print("Informe uma expressão matematica pos-fixa:");
   final entrada =  stdin.readLineSync();
   List expressao = entrada!.split(" "); 
   Lista pilhaNum = Lista();
-    if(expressao.length > 1){
-      for(int t = 0; t < expressao.length; t++){
-       if(expressao[t] == "+" || expressao[t] == "-" || expressao[t] == "*" || expressao[t] == "/"){
-         pilhaNum.push(calculos(pilhaNum.pop(),pilhaNum.pop(),expressao[t]));
-       }else{
-         pilhaNum.push(int.parse(expressao[t]));
-      } 
-     }  
-    }
+  if(expressao.length > 1){
+      calculadoraPosFixa(pilhaNum, expressao);
+    } 
   print(pilhaNum.lista);
+  
+}
+calculadoraPosFixa(var pilha, var expressao){
+  for(int t = 0; t < expressao.length; t++){
+    if(expressao[t] == "+" || expressao[t] == "-" || expressao[t] == "*" || expressao[t] == "/"){
+      pilha.push(calculos(pilha.pop(),pilha.pop(),expressao[t]));
+    }else{
+      pilha.push(double.parse(expressao[t]));
+    } 
+  }  
 }
 
 //Calculadora pos-fixa
