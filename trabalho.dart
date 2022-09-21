@@ -3,12 +3,21 @@ import 'dart:io';
 class Lista{
   var lista = [];
   var tamanho;
-
   //funçao push
-
+  void push(var add){
+    this.lista = this.lista + [add];
+  }
   //função pop
-  
-  
+  int pop(){
+   var temp = this.lista;
+   var retorno = this.lista[lista.length - 1];
+   this.lista = [];
+   for(int t = 0; t < temp.length - 1; t++){
+     this.lista = this.lista + [temp[t]];
+   }
+   return retorno;
+ }
+
 }
 
 void main() {
@@ -20,9 +29,9 @@ void main() {
     if(pilha.length > 1){
       for(int t = 1; t < pilha.length; t++){
        if(pilha[t] == "+" || pilha[t] == "-" || pilha[t] == "*" || pilha[t] == "/"){
-         //print(calculos(pilha[t - 2], pilha[t - 1],pilha[t]));
+         
          pilha2[pilha2.length - 1] = calculos(pilha2[(pilha2.length) - 2], pilha2.last,pilha[t]);
-         //print(pilha2);
+         
        }else{
          pilha2.add(int.parse(pilha[t]));
          print(pilha2);
