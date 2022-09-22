@@ -1,19 +1,21 @@
 import 'dart:io';
+//Classe Excecao:
 class Excecao implements Exception {
   String causa;
   Excecao(this.causa);
 }
-// Classe Lista
+//Classe Lista:
 class Lista{
   var lista = [];
+  //Construtor:
   Lista(){
     this.lista = []; 
   }
-  //funçao push
+  //funçao Push:
   void push(var add){
     this.lista = this.lista + [add];
   }
-  //função pop
+  //função Pop:
   pop(){
    var temp = this.lista;
    var retorno = this.lista[lista.length - 1];
@@ -23,17 +25,20 @@ class Lista{
    }
    return retorno;
  }
-  // Função get
+  // Função Get:
   get(){
     return lista[0];
   }
 }
-
+//Função Principal:
 void main() {
+  // Declarando Pilha de Número:
+  Lista pilhaNum = Lista();
+  //Entrada de Dados: 
   print("Informe uma expressão matematica pos-fixa:");
   final entrada =  stdin.readLineSync();
   List expressao = entrada!.split(" "); 
-  Lista pilhaNum = Lista();
+  //Verificando se Caracter Existe Caracter Difrente de Número ou Operador:
   for(int t = 0; t < expressao.length; t++){
     if(expressao[t] != "+" || expressao[t] != "-" || expressao[t] != "*" || expressao[t] != "/"){
       try{
@@ -46,25 +51,32 @@ void main() {
       }
     }
   }
+  //Chamando Calculadora Pós-Fixa:
   calculadoraPosFixa(pilhaNum, expressao);
 }
-
+//Calculadora Pos-fixa:
 calculadoraPosFixa(var pilha, var expressao){
-  // Verificação de erro:
    try{
+     //Verificando Erros:
      if(expressao[0] == "+" || expressao[1] == "+" || expressao[0] == "-" || expressao[1] == "-" || expressao[0] == "*" || expressao[1] == "*" || expressao[0] == "/" || expressao[1] == "/"){
         throw new Excecao('ERROR: Expressão dada é invalida');
      }else{
+       //
        for(int t = 0; t < expressao.length; t++){
          if(expressao[t] == "+" || expressao[t] == "-" || expressao[t] == "*" || expressao[t] == "/"){
+           //Calculo dos Numeros: 
            pilha.push(calculos(pilha.pop(),pilha.pop(),expressao[t])); 
          }else{
+           //preenchendo a pilha de Números:
            pilha.push(double.parse(expressao[t]));
-         }    
+         } 
+        //
        }
        if(pilha.lista.length != 1){
+         //Verificando Erros:
          throw new Excecao('ERROR: Expressão dada é invalida');
        }else{
+         //Resultado:
          print('Resultadado: ${pilha.get()}');
        } 
      }
@@ -73,8 +85,7 @@ calculadoraPosFixa(var pilha, var expressao){
      print("OBS: Confira se passou a expressão corretamente");
   }
 }
-
-//Calculadora pos-fixa
+//Calculos:
 calculos(var a,var b, String operador){
   switch(operador){
     case "+":
@@ -91,8 +102,7 @@ calculos(var a,var b, String operador){
       break;
   } 
 }
-
-// Testando se é numero:
+//Testando se é numero:
  bool testeNumerico(String str) {
   try{
     var numero = double.parse(str);
