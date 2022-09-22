@@ -10,7 +10,7 @@ class Lista{
     this.lista = this.lista + [add];
   }
   //função pop
-  int pop(){
+  pop(){
    var temp = this.lista;
    var retorno = this.lista[lista.length - 1];
    this.lista = [];
