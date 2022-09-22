@@ -1,16 +1,21 @@
 import 'dart:io';
-// Classe Lista
+class Excecao implements Exception {
+  String causa;
+  Excecao(this.causa);
+}
+// Classe Lista:
 class Lista{
   var lista = [];
+  // Construtor da classe:
   Lista(){
     this.lista = []; 
   }
-  //funçao push
+  // Funçao push:
   void push(var add){
     this.lista = this.lista + [add];
   }
-  //função pop
-  int pop(){
+  // Função pop:
+  pop(){
    var temp = this.lista;
    var retorno = this.lista[lista.length - 1];
    this.lista = [];
@@ -19,39 +24,83 @@ class Lista{
    }
    return retorno;
  }
+  // Função get
+  get(){
+    return lista[0];
+  }
 }
-
+// Principal:
 void main() {
   print("Informe uma expressão matematica pos-fixa:");
   final entrada =  stdin.readLineSync();
   List expressao = entrada!.split(" "); 
-  Lista pilha3 = Lista();
-    if(expressao.length > 1){
-      for(int t = 0; t < expressao.length; t++){
-       if(expressao[t] == "+" || expressao[t] == "-" || expressao[t] == "*" || expressao[t] == "/"){
-         pilha3.push(calculos(pilha3.pop(),pilha3.pop(),expressao[t]));
-       }else{
-         pilha3.push(int.parse(expressao[t]));
-      } 
-     }  
+  Lista pilhaNum = Lista();
+  for(int t = 0; t < expressao.length; t++){
+    if(expressao[t] != "+" || expressao[t] != "-" || expressao[t] != "*" || expressao[t] != "/"){
+      try{
+        if(!testeNumerico(expressao[t])){
+          throw new Excecao('ERROR: Expressão dada é invalida');
+        }
+      } on Excecao{
+        print("ERROR: expressão dada é invalida");
+        print("Utilize apenas números ou operadores");
+      }
     }
-  print(pilha3.lista);
+  }
+  calculadoraPosFixa(pilhaNum, expressao);
 }
 
-//Calculadora pos-fixa
+//Calculadora pos-fixa:
+calculadoraPosFixa(var pilha, var expressao){
+  // Verificação de erro:
+   try{
+     if(expressao[0] == "+" || expressao[1] == "+" || expressao[0] == "-" || expressao[1] == "-" || expressao[0] == "*" || expressao[1] == "*" || expressao[0] == "/" || expressao[1] == "/"){
+        throw new Excecao('ERROR: Expressão dada é invalida');
+     }else{
+       for(int t = 0; t < expressao.length; t++){
+         if(expressao[t] == "+" || expressao[t] == "-" || expressao[t] == "*" || expressao[t] == "/"){
+           pilha.push(calculos(pilha.pop(),pilha.pop(),expressao[t])); 
+         }else{
+           pilha.push(double.parse(expressao[t]));
+         }    
+        }
+       if(pilha.lista.length != 1){
+         throw new Excecao('ERROR: Expressão dada é invalida');
+       }else{
+         print('Resultadado: ${pilha.get()}');
+        } 
+     }
+   } on Excecao{
+     print("ERROR: expressão dada é invalida");
+     print("Confira se passou a expressão corretamente");
+  }
+}
+// Calculos:
 calculos(var a,var b, String operador){
+  
   switch(operador){
     case "+":
-      return b+a;
+      return b + a;
       break;
     case "-":
-      return b-a;
+      return b - a;
       break;
     case "*":
-      return b*a;
+      return b * a;
       break;
     case "/":
-      return b/a;
+      return b / a;
       break;
   } 
 }
+// Testando se é numero:
+ bool testeNumerico(String str) {
+  try{
+    var numero = double.parse(str);
+  } on FormatException {
+    return false;
+  } finally {
+    return true;
+  }
+}
+
