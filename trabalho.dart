@@ -100,7 +100,6 @@ calculadoraPosFixa(var pilha, var expressao) {
     print("OBS: Confira se passou a expressão corretamente");
   }
 }
-
 //Calculos:
 calculos(var a, var b, String operador) {
   switch (operador) {
@@ -118,7 +117,6 @@ calculos(var a, var b, String operador) {
       break;
   }
 }
-
 //Testando se é numero:
 bool testeNumerico(String str) {
   try {
