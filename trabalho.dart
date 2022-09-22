@@ -5,7 +5,6 @@ class Excecao implements Exception {
   String causa;
   Excecao(this.causa);
 }
-
 //Classe Lista:
 class Lista {
   var lista = [];
@@ -17,7 +16,6 @@ class Lista {
   void push(var add) {
     this.lista = this.lista + [add];
   }
-
   //função Pop:
   pop() {
     var temp = this.lista;
@@ -28,7 +26,6 @@ class Lista {
     }
     return retorno;
   }
-
   // Função Get:
   get() {
     return lista[0];
