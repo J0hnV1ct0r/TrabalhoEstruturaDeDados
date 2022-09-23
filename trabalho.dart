@@ -5,6 +5,7 @@ class Excecao implements Exception {
   String causa;
   Excecao(this.causa);
 }
+//
 //Classe Lista:
 class Lista {
   var lista = [];
@@ -31,6 +32,7 @@ class Lista {
     return lista[0];
   }
 }
+//
 //Função Principal:
 void main() {
   // Declarando Pilha de Número:
@@ -58,7 +60,7 @@ void main() {
   //Chamando Calculadora Pós-Fixa:
   calculadoraPosFixa(pilhaNum, expressao);
 }
-
+//
 //Calculadora Pos-fixa:
 calculadoraPosFixa(var pilha, var expressao) {
   try {
@@ -100,6 +102,7 @@ calculadoraPosFixa(var pilha, var expressao) {
     print("OBS: Confira se passou a expressão corretamente");
   }
 }
+//
 //Calculos:
 calculos(var a, var b, String operador) {
   switch (operador) {
@@ -117,13 +120,16 @@ calculos(var a, var b, String operador) {
       break;
   }
 }
+//
 //Testando se é numero:
-bool testeNumerico(String str) {
-  try {
-    var numero = double.parse(str);
-  } on FormatException {
+bool testeNumerico(String s) {
+  if (s.isEmpty) {
     return false;
-  } finally {
-    return true;
   }
+
+  final number = num.tryParse(s);
+  if (number == null) {
+    return false;
+  }
+  return true;
 }
