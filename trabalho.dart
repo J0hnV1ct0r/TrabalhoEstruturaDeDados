@@ -123,10 +123,6 @@ calculos(var a, var b, String operador) {
 //
 //Testando se é numero:
 bool testeNumerico(String s) {
-  if (s.isEmpty) {
-    return false;
-  }
-
   final number = num.tryParse(s);
   if (number == null) {
     return false;
