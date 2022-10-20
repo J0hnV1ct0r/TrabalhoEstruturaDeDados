@@ -50,7 +50,7 @@ void main() {
         expressao[t] != "/") {
       try {
         if (!testeNumerico(expressao[t])) {
-          throw new Excecao('ERROR: Expressão dada é invalida');
+          //throw new Excecao('ERROR: Expressão dada é invalida');
         }
       } on Excecao {
         print("ERROR: expressão dada é invalida");
